@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Files.InputModels;
-using Files.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,26 +105,6 @@ namespace Files.Database
             //check to see if there is anything in there already, and if there is, do nothing.
 
             //Here we seed some values if there aren't any yet.
-            var valueRepo = toolArgs.Scope.ServiceProvider.GetRequiredService<IValueRepository>();
-            if (!await valueRepo.HasValues())
-            {
-                await valueRepo.AddRange(ValueCreator());
-            }
-        }
-
-        /// <summary>
-        /// Helper function to generate values for seeding the database.
-        /// </summary>
-        /// <returns></returns>
-        private static IEnumerable<ValueInput> ValueCreator()
-        {
-            for (var i = 0; i < 250; ++i)
-            {
-                yield return new ValueInput()
-                {
-                    Name = "Value " + i
-                };
-            }
         }
 
         /// <summary>

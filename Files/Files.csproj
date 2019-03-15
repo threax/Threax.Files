@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ModelSchemas\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
