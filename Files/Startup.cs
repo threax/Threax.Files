@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -16,6 +17,7 @@ using System.IO;
 using System.Reflection;
 using Threax.AspNetCore.BuiltInTools;
 using Threax.AspNetCore.CorsManager;
+using Threax.AspNetCore.FileRepository;
 using Threax.AspNetCore.Halcyon.ClientGen;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.IdServerAuth;
@@ -98,7 +100,24 @@ namespace Files
             services.AddAppRepositories();
             services.AddFileRepository(new FileRepositoryOptions()
             {
-                OutputDir = appConfig.FileSystemPath
+                OutputDir = appConfig.FileSystemPath,
+                ConfigureVerifier = o =>
+                {
+                    o
+                    .AddBitmap()
+                    .AddJpeg()
+                    .AddPng()
+                    .AddSvgXml()
+                    .AddGif()
+                    .AddPdf()
+                    .AddDocx()
+                    .AddDoc()
+                    .AddPptx()
+                    .AddPpt()
+                    .AddXlsx()
+                    .AddXls()
+                    .AddJson();
+                }
             });
 
             var halOptions = new HalcyonConventionOptions()
@@ -188,6 +207,8 @@ namespace Files
                     .AddConsole()
                     .AddDebug();
             });
+
+            services.AddScoped<IContentTypeProvider, FileExtensionContentTypeProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

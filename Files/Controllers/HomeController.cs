@@ -11,7 +11,6 @@ namespace Files.Controllers
     public partial class HomeController : Controller
     {
         //You can get rid of this AllowAnonymous to secure the welcome page
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

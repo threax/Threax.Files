@@ -12,9 +12,9 @@ namespace Files.ViewModels
     /// A list of files in a directory.
     /// </summary>
     [HalModel]
-    [HalActionLink(UploadController.Rels.ListUploadedFiles, typeof(UploadController))]
-    [HalActionLink(UploadController.Rels.UploadFile, typeof(UploadController))]
-    [HalActionLink(UploadController.Rels.DeleteFile, typeof(UploadController))]
+    [HalActionLink(FilesController.Rels.ListUploadedFiles, typeof(FilesController))]
+    [HalActionLink(FilesController.Rels.UploadFile, typeof(FilesController))]
+    [HalActionLink(FilesController.Rels.DeleteFile, typeof(FilesController))]
     public class FileList
     {
         /// <summary>

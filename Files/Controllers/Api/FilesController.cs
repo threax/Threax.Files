@@ -1,8 +1,8 @@
 ﻿using Files.InputModels;
-using Files.Services;
 using Files.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,27 +16,21 @@ namespace Files.Controllers.Api
     [Authorize(AuthenticationSchemes = AuthCoreSchemes.Bearer)]
     [Route("api/[controller]/[action]")]
     [ResponseCache(NoStore = true)]
-    public class UploadController : Controller
+    public class FilesController : Controller
     {
         public static class Rels
         {
             public const String UploadFile = "UploadFile";
             public const String ListUploadedFiles = "ListUploadedFiles";
             public const String DeleteFile = "DeleteFile";
+            public const String Download = "Download";
         }
 
-        private IFileFinder fileFinder;
-        private ITargetFileInfoProvider fileInfoProvider;
+        private IFileRepository fileRepo;
 
-        /// <summary>
-        /// Controller.
-        /// </summary>
-        /// <param name="fileFinder"></param>
-        /// <param name="fileInfoProvider">The file info provider.</param>
-        public UploadController(IFileFinder fileFinder, ITargetFileInfoProvider fileInfoProvider)
+        public FilesController(IFileRepository fileRepo)
         {
-            this.fileFinder = fileFinder;
-            this.fileInfoProvider = fileInfoProvider;
+            this.fileRepo = fileRepo;
         }
 
         /// <summary>
@@ -55,24 +49,12 @@ namespace Files.Controllers.Api
                 dir = "";
             }
 
-            dir = RemovePathBase(dir, HttpContext.Request.PathBase);
-
             return new FileList
             {
-                Directories = fileFinder.GetDirectories(dir).Select(i => i.Replace('\\', '/')),
-                Files = fileFinder.GetFiles(dir).Select(i => i.Replace('\\', '/')),
+                Directories = fileRepo.GetDirectories(dir).Select(i => i.Replace('\\', '/')),
+                Files = fileRepo.GetFiles(dir).Select(i => i.Replace('\\', '/')),
                 Path = dir
             };
-        }
-
-        private static string RemovePathBase(string path, string pathBase)
-        {
-            if (pathBase != null && path != null && path.StartsWith(pathBase, StringComparison.OrdinalIgnoreCase))
-            {
-                path = path.Substring(pathBase.Length);
-            }
-
-            return path;
         }
 
         /// <summary>
@@ -85,14 +67,9 @@ namespace Files.Controllers.Api
         [HalRel(Rels.UploadFile)]
         public async Task Upload([FromForm] UploadInput input, [FromServices] IFileVerifier fileVerifier)
         {
-            var fileInfo = fileInfoProvider.GetFileInfo(input.File, HttpContext.Request.PathBase);
             using (var uploadStream = input.Content.OpenReadStream())
             {
-                fileVerifier.Validate(uploadStream, fileInfo.DerivedFileName, input.Content.ContentType);
-                using (Stream stream = fileFinder.OpenWriteStream(fileInfo.DerivedFileName))
-                {
-                    await uploadStream.CopyToAsync(stream);
-                }
+                await fileRepo.SaveFile(input.File, input.Content.ContentType, uploadStream);
             }
         }
 
@@ -105,8 +82,31 @@ namespace Files.Controllers.Api
         [HalRel(Rels.DeleteFile)]
         public void Delete([FromQuery] DeleteFileQuery query)
         {
-            var fileInfo = fileInfoProvider.GetFileInfo(query.File, HttpContext.Request.PathBase);
-            fileFinder.DeleteFile(fileInfo.DerivedFileName);
+            fileRepo.DeleteFile(query.File);
+        }
+
+        /// <summary>
+        /// Get a single value.
+        /// </summary>
+        /// <param name="file">The file to download.</param>
+        /// <param name="contentTypeProvider">The content type provider from services.</param>
+        /// <returns></returns>
+        [HttpGet("{File}")]
+        [HalRel(Rels.Download)]
+        [Route("api/download/{*file}")]
+        public FileStreamResult Download(String file, [FromServices] IContentTypeProvider contentTypeProvider)
+        {
+            String contentType;
+            if (!contentTypeProvider.TryGetContentType(file, out contentType))
+            {
+                throw new FileNotFoundException($"Cannot find file type for '{file}'", file);
+            }
+            if (contentType?.Equals("text/html", StringComparison.InvariantCultureIgnoreCase) == true)
+            {
+                contentType = "text";
+            }
+
+            return new FileStreamResult(fileRepo.OpenFile(file), contentType);
         }
     }
 }

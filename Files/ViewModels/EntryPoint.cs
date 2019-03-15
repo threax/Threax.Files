@@ -16,6 +16,10 @@ namespace Files.ViewModels
     //User Search Actions
     [HalActionLink(typeof(UserSearchController), nameof(UserSearchController.List), "ListAppUsers")]
     //The additional entry point links are in the other entry point partial classes, expand this node to see them
+
+    [HalActionLink(FilesController.Rels.UploadFile, typeof(FilesController))]
+    [HalActionLink(FilesController.Rels.DeleteFile, typeof(FilesController))]
+    [HalActionLink(FilesController.Rels.ListUploadedFiles, typeof(FilesController))]
     public partial class EntryPoint
     {
     }

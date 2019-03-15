@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Files.Controllers
 {
+    [Authorize(AuthenticationSchemes = AuthCoreSchemes.Cookies)]
     public class ApiExplorerController : Controller
     {
         /// <summary>

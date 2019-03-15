@@ -14,25 +14,7 @@ namespace Files.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799");
-
-            modelBuilder.Entity("Files.Database.ValueEntity", b =>
-                {
-                    b.Property<Guid>("ValueId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("Modified");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(450);
-
-                    b.HasKey("ValueId");
-
-                    b.ToTable("Values");
-                });
+                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
 
             modelBuilder.Entity("Threax.AspNetCore.UserBuilder.Entities.Role", b =>
                 {
