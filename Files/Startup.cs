@@ -96,6 +96,10 @@ namespace Files
             services.AddAppDatabase(appConfig.ConnectionString);
             services.AddAppMapper();
             services.AddAppRepositories();
+            services.AddFileRepository(new FileRepositoryOptions()
+            {
+                OutputDir = appConfig.FileSystemPath
+            });
 
             var halOptions = new HalcyonConventionOptions()
             {
