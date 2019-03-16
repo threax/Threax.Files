@@ -69,8 +69,8 @@ htmlrapier.roleclient@^4.0.0:
     jsns ">=4.2.2"
 
 htmlrapier.widgets@>=14.0.0, htmlrapier.widgets@^15.0.0:
-  version "15.6.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-15.6.0.tgz#743e8ac17ed859b32a302c88ac308f7c8fa068c4"
+  version "15.7.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-15.7.0.tgz#3e46d0349c81833542f1a1fc21953f715b7f9226"
   dependencies:
     htmlrapier ">=14.3.0"
     htmlrapier.halcyon ">=7.0.0"
