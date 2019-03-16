@@ -40,7 +40,7 @@ namespace Files.Controllers.Api
         /// <returns>A list of files under dir.</returns>
         [HttpGet]
         [HalRel(Rels.ListUploadedFiles)]
-        public FileList List([FromQuery] ListFileQuery query)
+        public async Task<FileList> List([FromQuery] ListFileQuery query)
         {
             var dir = query.Dir;
 
@@ -51,8 +51,8 @@ namespace Files.Controllers.Api
 
             return new FileList
             {
-                Directories = fileRepo.GetDirectories(dir).Select(i => i.Replace('\\', '/')),
-                Files = fileRepo.GetFiles(dir).Select(i => i.Replace('\\', '/')),
+                Directories = (await fileRepo.GetDirectories(dir)).Select(i => i.Replace('\\', '/')),
+                Files = (await fileRepo.GetFiles(dir)).Select(i => i.Replace('\\', '/')),
                 Path = dir
             };
         }
@@ -69,7 +69,7 @@ namespace Files.Controllers.Api
         {
             using (var uploadStream = input.Content.OpenReadStream())
             {
-                await fileRepo.SaveFile(input.File, input.Content.ContentType, uploadStream);
+                await fileRepo.WriteFile(input.File, input.Content.ContentType, uploadStream);
             }
         }
 
@@ -94,7 +94,7 @@ namespace Files.Controllers.Api
         [HttpGet("{File}")]
         [HalRel(Rels.Download)]
         [Route("api/download/{*file}")]
-        public FileStreamResult Download(String file, [FromServices] IContentTypeProvider contentTypeProvider)
+        public async Task<FileStreamResult> Download(String file, [FromServices] IContentTypeProvider contentTypeProvider)
         {
             String contentType;
             if (!contentTypeProvider.TryGetContentType(file, out contentType))
@@ -106,7 +106,7 @@ namespace Files.Controllers.Api
                 contentType = "text";
             }
 
-            return new FileStreamResult(fileRepo.OpenFile(file), contentType);
+            return new FileStreamResult(await fileRepo.OpenRead(file), contentType);
         }
     }
 }
