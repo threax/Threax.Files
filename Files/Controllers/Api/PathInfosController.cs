@@ -42,11 +42,12 @@ namespace Files.Controllers.Api
         [HttpPost]
         [HalRel(CrudRels.Add)]
         [AutoValidate("Cannot add new pathInfo")]
+        [RequestSizeLimit(1073741824)]
         public async Task<PathInfo> Add([FromForm]PathInfoInput pathInfo)
         {
             using (var read = pathInfo.File.OpenReadStream())
             {
-                return await repo.Upload(pathInfo.Path, Path.GetFileName(pathInfo.File.FileName), read, pathInfo.File.ContentType);
+                return await repo.Upload(pathInfo.Path ?? "", Path.GetFileName(pathInfo.File.FileName), read, pathInfo.File.ContentType);
             }
         }
 
