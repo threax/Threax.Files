@@ -32,7 +32,7 @@ namespace Files.Controllers.Api
             return await repo.List(query);
         }
 
-        [HttpGet("{Path}")]
+        [HttpGet("{*Path}")]
         [HalRel(CrudRels.Get)]
         public async Task<PathInfo> Get(String path)
         {
@@ -50,35 +50,11 @@ namespace Files.Controllers.Api
             }
         }
 
-        [HttpDelete("{Path}")]
+        [HttpDelete("{*Path}")]
         [HalRel(CrudRels.Delete)]
         public async Task Delete(String path)
         {
             await repo.Delete(path);
-        }
-
-        /// <summary>
-        /// Get a single value.
-        /// </summary>
-        /// <param name="path">The file to download.</param>
-        /// <param name="contentTypeProvider">The content type provider from services.</param>
-        /// <returns></returns>
-        [HttpGet("[action]/{Path}")]
-        [HalRel("Download")]
-        public async Task<FileStreamResult> Download(String path, [FromServices] IContentTypeProvider contentTypeProvider)
-        {
-            String contentType;
-            if (!contentTypeProvider.TryGetContentType(path, out contentType))
-            {
-                throw new FileNotFoundException($"Cannot find file type for '{path}'", path);
-            }
-            if (contentType?.Equals("text/html", StringComparison.InvariantCultureIgnoreCase) == true)
-            {
-                contentType = "application/octet-stream";
-                Response.Headers["Content-Disposition"] = "attachment";
-            }
-
-            return new FileStreamResult(await repo.OpenRead(path), contentType);
         }
     }
 }

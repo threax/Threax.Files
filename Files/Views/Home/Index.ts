@@ -52,8 +52,8 @@ class FileRow extends CrudTableRowControllerExtensions {
 
     public async visit(evt: Event): Promise<void> {
         if (this.data.data.isFile) {
-            if (this.data.canBrowserDownload()) {
-                window.location.href = this.data.linkForBrowserDownload().href;
+            if (this.data.canDownload()) {
+                window.location.href = this.data.linkForDownload().href;
             }
         }
         else {

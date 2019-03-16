@@ -15,10 +15,8 @@ namespace Files.ViewModels
 {
     [HalModel]
     [HalSelfActionLink(typeof(PathInfosController), nameof(PathInfosController.Get))]
-    //[HalActionLink(typeof(PathInfosController), nameof(PathInfosController.Update))]
     [HalActionLink(typeof(PathInfosController), nameof(PathInfosController.Delete))]
-    [DeclareHalLink(typeof(DownloadController), nameof(DownloadController.Download), "BrowserDownload")]
-    [DeclareHalLink(typeof(PathInfosController), nameof(PathInfosController.Download))]
+    [DeclareHalLink(typeof(DownloadController), nameof(DownloadController.Download))]
     public partial class PathInfo : IHalLinkProvider
     {
         public bool IsFile { get; set; }
@@ -29,8 +27,7 @@ namespace Files.ViewModels
         {
             if (IsFile)
             {
-                yield return new HalActionLinkAttribute(typeof(DownloadController), nameof(DownloadController.Download), "BrowserDownload");
-                yield return new HalActionLinkAttribute(typeof(PathInfosController), nameof(PathInfosController.Download));
+                yield return new HalActionLinkAttribute(typeof(DownloadController), nameof(DownloadController.Download));
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Files.Controllers
 {
     [Route("[controller]")]
     [ResponseCache(NoStore = true)]
-    [Authorize(AuthenticationSchemes = AuthCoreSchemes.Cookies)]
+    [Authorize(AuthenticationSchemes = AuthCoreSchemes.Cookies + "," + AuthCoreSchemes.Bearer)]
     public class DownloadController : Controller
     {
         private IPathInfoRepository repo;
@@ -29,14 +29,15 @@ namespace Files.Controllers
         /// <param name="path">The file to download.</param>
         /// <param name="contentTypeProvider">The content type provider from services.</param>
         /// <returns></returns>
-        [HttpGet("{Path}")]
+        [HttpGet("{*Path}")]
         [HalRel("Download")]
         public async Task<FileStreamResult> Download(String path, [FromServices] IContentTypeProvider contentTypeProvider)
         {
             String contentType;
             if (!contentTypeProvider.TryGetContentType(path, out contentType))
             {
-                throw new FileNotFoundException($"Cannot find file type for '{path}'", path);
+                contentType = "application/octet-stream";
+                Response.Headers["Content-Disposition"] = "attachment";
             }
             if (contentType?.Equals("text/html", StringComparison.InvariantCultureIgnoreCase) == true)
             {

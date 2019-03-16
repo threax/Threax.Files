@@ -391,29 +391,6 @@ export class PathInfoResult {
         return this.client.GetLink("Delete");
     }
 
-    public browserDownload(): Promise<hal.Response> {
-        return this.client.LoadRawLink("BrowserDownload");
-    }
-
-    public canBrowserDownload(): boolean {
-        return this.client.HasLink("BrowserDownload");
-    }
-
-    public linkForBrowserDownload(): hal.HalLink {
-        return this.client.GetLink("BrowserDownload");
-    }
-
-    public getBrowserDownloadDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("BrowserDownload", query)
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasBrowserDownloadDocs(): boolean {
-        return this.client.HasLinkDoc("BrowserDownload");
-    }
-
     public download(): Promise<hal.Response> {
         return this.client.LoadRawLink("Download");
     }
