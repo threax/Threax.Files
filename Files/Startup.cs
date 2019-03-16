@@ -103,6 +103,7 @@ namespace Files
                 OutputDir = appConfig.FileSystemPath,
                 ConfigureVerifier = o =>
                 {
+                    o.AllowUnknownFiles = true;
                     o
                     .AddBitmap()
                     .AddJpeg()
