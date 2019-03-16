@@ -22,7 +22,7 @@
                 <template data-hr-component="mainTableBody">
                     <table>
                         <tr>
-                            <td>{{path}}{{if !isFile}} Dir{{/if}}</td>
+                            <td>{{if !isFile}}&#128193;{{/if}} {{path}}</td>
                             <td>
                                 <button data-hr-on-click="visit" class="btn btn-default" data-hr-toggle="visit" data-hr-style-off="display:none;">Visit</button>
                                 <button data-hr-on-click="del" class="btn btn-default" data-hr-toggle="del" data-hr-style-off="display:none;">Delete</button>
