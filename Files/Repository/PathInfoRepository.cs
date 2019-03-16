@@ -41,7 +41,7 @@ namespace Files.Repository
                                       .Select(i => new PathInfo()
                                       {
                                           Path = i,
-                                          IsDirectory = true
+                                          IsFile = false
                                       });
 
             var repoFiles = await fileRepo.GetFiles(dir, pattern, searchOption);
@@ -50,7 +50,7 @@ namespace Files.Repository
                                  .Select(i => new PathInfo()
                                  {
                                      Path = i,
-                                     IsDirectory = false
+                                     IsFile = true
                                  });
 
             var total = repoDirs.Concat(repoFiles).Count();
@@ -66,7 +66,7 @@ namespace Files.Repository
             return new PathInfo()
             {
                 Path = path,
-                IsDirectory = await this.fileRepo.DirectoryExists(path)
+                IsFile = await this.fileRepo.FileExists(path)
             };
         }
 
@@ -77,7 +77,7 @@ namespace Files.Repository
             return new PathInfo()
             {
                 Path = path,
-                IsDirectory = false
+                IsFile = true
             };
         }
 
@@ -91,6 +91,11 @@ namespace Files.Repository
             {
                 await this.fileRepo.DeleteFile(path);
             }
+        }
+
+        public Task<Stream> OpenRead(string file)
+        {
+            return this.fileRepo.OpenRead(file);
         }
     }
 }

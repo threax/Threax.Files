@@ -17,5 +17,7 @@ namespace Files.Repository
         Task<PathInfo> Upload(String directory, String file, Stream fileStream, String mimeType);
 
         Task Delete(String path);
+
+        Task<Stream> OpenRead(string file);
     }
 }

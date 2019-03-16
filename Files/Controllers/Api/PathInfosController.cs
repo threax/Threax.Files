@@ -9,6 +9,7 @@ using Files.ViewModels;
 using Files.InputModels;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace Files.Controllers.Api
 {
@@ -54,6 +55,30 @@ namespace Files.Controllers.Api
         public async Task Delete(String path)
         {
             await repo.Delete(path);
+        }
+
+        /// <summary>
+        /// Get a single value.
+        /// </summary>
+        /// <param name="file">The file to download.</param>
+        /// <param name="contentTypeProvider">The content type provider from services.</param>
+        /// <returns></returns>
+        [HttpGet("[action]/{Path}")]
+        [HalRel("Download")]
+        public async Task<FileStreamResult> Download(String file, [FromServices] IContentTypeProvider contentTypeProvider)
+        {
+            String contentType;
+            if (!contentTypeProvider.TryGetContentType(file, out contentType))
+            {
+                throw new FileNotFoundException($"Cannot find file type for '{file}'", file);
+            }
+            if (contentType?.Equals("text/html", StringComparison.InvariantCultureIgnoreCase) == true)
+            {
+                contentType = "application/octet-stream";
+                Response.Headers["Content-Disposition"] = "attachment";
+            }
+
+            return new FileStreamResult(await repo.OpenRead(file), contentType);
         }
     }
 }

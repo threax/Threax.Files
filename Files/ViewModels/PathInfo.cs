@@ -16,11 +16,18 @@ namespace Files.ViewModels
     [HalSelfActionLink(typeof(PathInfosController), nameof(PathInfosController.Get))]
     //[HalActionLink(typeof(PathInfosController), nameof(PathInfosController.Update))]
     [HalActionLink(typeof(PathInfosController), nameof(PathInfosController.Delete))]
-    public partial class PathInfo
+    public partial class PathInfo : IHalLinkProvider
     {
-        public bool IsDirectory { get; set; }
+        public bool IsFile { get; set; }
 
         public String Path { get; set; }
 
+        public IEnumerable<HalLinkAttribute> CreateHalLinks(ILinkProviderContext context)
+        {
+            if (IsFile)
+            {
+                yield return new HalActionLinkAttribute(typeof(PathInfosController), nameof(PathInfosController.Download));
+            }
+        }
     }
 }
