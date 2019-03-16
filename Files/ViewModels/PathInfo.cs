@@ -9,6 +9,7 @@ using Threax.AspNetCore.Models;
 using Threax.AspNetCore.Tracking;
 using Files.Controllers.Api;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
+using Files.Controllers;
 
 namespace Files.ViewModels 
 {
@@ -16,6 +17,8 @@ namespace Files.ViewModels
     [HalSelfActionLink(typeof(PathInfosController), nameof(PathInfosController.Get))]
     //[HalActionLink(typeof(PathInfosController), nameof(PathInfosController.Update))]
     [HalActionLink(typeof(PathInfosController), nameof(PathInfosController.Delete))]
+    [DeclareHalLink(typeof(DownloadController), nameof(DownloadController.Download), "BrowserDownload")]
+    [DeclareHalLink(typeof(PathInfosController), nameof(PathInfosController.Download))]
     public partial class PathInfo : IHalLinkProvider
     {
         public bool IsFile { get; set; }
@@ -26,6 +29,7 @@ namespace Files.ViewModels
         {
             if (IsFile)
             {
+                yield return new HalActionLinkAttribute(typeof(DownloadController), nameof(DownloadController.Download), "BrowserDownload");
                 yield return new HalActionLinkAttribute(typeof(PathInfosController), nameof(PathInfosController.Download));
             }
         }

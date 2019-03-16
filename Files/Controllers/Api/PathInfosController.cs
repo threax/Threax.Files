@@ -60,17 +60,17 @@ namespace Files.Controllers.Api
         /// <summary>
         /// Get a single value.
         /// </summary>
-        /// <param name="file">The file to download.</param>
+        /// <param name="path">The file to download.</param>
         /// <param name="contentTypeProvider">The content type provider from services.</param>
         /// <returns></returns>
         [HttpGet("[action]/{Path}")]
         [HalRel("Download")]
-        public async Task<FileStreamResult> Download(String file, [FromServices] IContentTypeProvider contentTypeProvider)
+        public async Task<FileStreamResult> Download(String path, [FromServices] IContentTypeProvider contentTypeProvider)
         {
             String contentType;
-            if (!contentTypeProvider.TryGetContentType(file, out contentType))
+            if (!contentTypeProvider.TryGetContentType(path, out contentType))
             {
-                throw new FileNotFoundException($"Cannot find file type for '{file}'", file);
+                throw new FileNotFoundException($"Cannot find file type for '{path}'", path);
             }
             if (contentType?.Equals("text/html", StringComparison.InvariantCultureIgnoreCase) == true)
             {
@@ -78,7 +78,7 @@ namespace Files.Controllers.Api
                 Response.Headers["Content-Disposition"] = "attachment";
             }
 
-            return new FileStreamResult(await repo.OpenRead(file), contentType);
+            return new FileStreamResult(await repo.OpenRead(path), contentType);
         }
     }
 }
