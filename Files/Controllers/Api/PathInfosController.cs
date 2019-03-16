@@ -8,6 +8,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 using Files.ViewModels;
 using Files.InputModels;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace Files.Controllers.Api
 {
@@ -37,14 +38,14 @@ namespace Files.Controllers.Api
             return await repo.Get(path);
         }
 
-        [HttpPost("{Path}")]
+        [HttpPost]
         [HalRel(CrudRels.Add)]
         [AutoValidate("Cannot add new pathInfo")]
-        public async Task<PathInfo> Add(String path, [FromForm]PathInfoInput pathInfo)
+        public async Task<PathInfo> Add([FromForm]PathInfoInput pathInfo)
         {
             using (var read = pathInfo.File.OpenReadStream())
             {
-                return await repo.Upload(path, pathInfo.File.FileName, read, pathInfo.File.ContentType);
+                return await repo.Upload("", Path.GetFileName(pathInfo.File.FileName), read, pathInfo.File.ContentType);
             }
         }
 

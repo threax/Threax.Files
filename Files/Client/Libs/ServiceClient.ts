@@ -284,78 +284,238 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("ListAppUsers");
     }
 
-    public listValues(data: ValueQuery): Promise<ValueCollectionResult> {
-        return this.client.LoadLinkWithData("ListValues", data)
-               .then(r => {
-                    return new ValueCollectionResult(r);
-                });
-
+    public uploadFile(data: UploadInput): Promise<void> {
+        return this.client.LoadLinkWithData("UploadFile", data).then(hal.makeVoid);
     }
 
-    public canListValues(): boolean {
-        return this.client.HasLink("ListValues");
+    public canUploadFile(): boolean {
+        return this.client.HasLink("UploadFile");
     }
 
-    public linkForListValues(): hal.HalLink {
-        return this.client.GetLink("ListValues");
+    public linkForUploadFile(): hal.HalLink {
+        return this.client.GetLink("UploadFile");
     }
 
-    public getListValuesDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("ListValues", query)
+    public getUploadFileDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("UploadFile", query)
             .then(r => {
                 return r.GetData<hal.HalEndpointDoc>();
             });
     }
 
-    public hasListValuesDocs(): boolean {
-        return this.client.HasLinkDoc("ListValues");
+    public hasUploadFileDocs(): boolean {
+        return this.client.HasLinkDoc("UploadFile");
     }
 
-    public addValue(data: ValueInput): Promise<ValueResult> {
-        return this.client.LoadLinkWithData("AddValue", data)
-               .then(r => {
-                    return new ValueResult(r);
-                });
-
+    public deleteFile(data: DeleteFileQuery): Promise<void> {
+        return this.client.LoadLinkWithData("DeleteFile", data).then(hal.makeVoid);
     }
 
-    public canAddValue(): boolean {
-        return this.client.HasLink("AddValue");
+    public canDeleteFile(): boolean {
+        return this.client.HasLink("DeleteFile");
     }
 
-    public linkForAddValue(): hal.HalLink {
-        return this.client.GetLink("AddValue");
+    public linkForDeleteFile(): hal.HalLink {
+        return this.client.GetLink("DeleteFile");
     }
 
-    public getAddValueDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("AddValue", query)
+    public getDeleteFileDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("DeleteFile", query)
             .then(r => {
                 return r.GetData<hal.HalEndpointDoc>();
             });
     }
 
-    public hasAddValueDocs(): boolean {
-        return this.client.HasLinkDoc("AddValue");
+    public hasDeleteFileDocs(): boolean {
+        return this.client.HasLinkDoc("DeleteFile");
+    }
+
+    public listUploadedFiles(data: ListFileQuery): Promise<FileListResult> {
+        return this.client.LoadLinkWithData("ListUploadedFiles", data)
+               .then(r => {
+                    return new FileListResult(r);
+                });
+
+    }
+
+    public canListUploadedFiles(): boolean {
+        return this.client.HasLink("ListUploadedFiles");
+    }
+
+    public linkForListUploadedFiles(): hal.HalLink {
+        return this.client.GetLink("ListUploadedFiles");
+    }
+
+    public getListUploadedFilesDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ListUploadedFiles", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListUploadedFilesDocs(): boolean {
+        return this.client.HasLinkDoc("ListUploadedFiles");
+    }
+
+    public listPathInfos(data: PathInfoQuery): Promise<PathInfoCollectionResult> {
+        return this.client.LoadLinkWithData("ListPathInfos", data)
+               .then(r => {
+                    return new PathInfoCollectionResult(r);
+                });
+
+    }
+
+    public canListPathInfos(): boolean {
+        return this.client.HasLink("ListPathInfos");
+    }
+
+    public linkForListPathInfos(): hal.HalLink {
+        return this.client.GetLink("ListPathInfos");
+    }
+
+    public getListPathInfosDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ListPathInfos", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListPathInfosDocs(): boolean {
+        return this.client.HasLinkDoc("ListPathInfos");
+    }
+
+    public addPathInfo(data: PathInfoInput): Promise<PathInfoResult> {
+        return this.client.LoadLinkWithData("AddPathInfo", data)
+               .then(r => {
+                    return new PathInfoResult(r);
+                });
+
+    }
+
+    public canAddPathInfo(): boolean {
+        return this.client.HasLink("AddPathInfo");
+    }
+
+    public linkForAddPathInfo(): hal.HalLink {
+        return this.client.GetLink("AddPathInfo");
+    }
+
+    public getAddPathInfoDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("AddPathInfo", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasAddPathInfoDocs(): boolean {
+        return this.client.HasLinkDoc("AddPathInfo");
     }
 }
 
-export class ValueResult {
+export class FileListResult {
     private client: hal.HalEndpointClient;
 
     constructor(client: hal.HalEndpointClient) {
         this.client = client;
     }
 
-    private strongData: Value = undefined;
-    public get data(): Value {
-        this.strongData = this.strongData || this.client.GetData<Value>();
+    private strongData: FileList = undefined;
+    public get data(): FileList {
+        this.strongData = this.strongData || this.client.GetData<FileList>();
         return this.strongData;
     }
 
-    public refresh(): Promise<ValueResult> {
+    public listUploadedFiles(data: ListFileQuery): Promise<FileListResult> {
+        return this.client.LoadLinkWithData("ListUploadedFiles", data)
+               .then(r => {
+                    return new FileListResult(r);
+                });
+
+    }
+
+    public canListUploadedFiles(): boolean {
+        return this.client.HasLink("ListUploadedFiles");
+    }
+
+    public linkForListUploadedFiles(): hal.HalLink {
+        return this.client.GetLink("ListUploadedFiles");
+    }
+
+    public getListUploadedFilesDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ListUploadedFiles", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListUploadedFilesDocs(): boolean {
+        return this.client.HasLinkDoc("ListUploadedFiles");
+    }
+
+    public uploadFile(data: UploadInput): Promise<void> {
+        return this.client.LoadLinkWithData("UploadFile", data).then(hal.makeVoid);
+    }
+
+    public canUploadFile(): boolean {
+        return this.client.HasLink("UploadFile");
+    }
+
+    public linkForUploadFile(): hal.HalLink {
+        return this.client.GetLink("UploadFile");
+    }
+
+    public getUploadFileDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("UploadFile", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUploadFileDocs(): boolean {
+        return this.client.HasLinkDoc("UploadFile");
+    }
+
+    public deleteFile(data: DeleteFileQuery): Promise<void> {
+        return this.client.LoadLinkWithData("DeleteFile", data).then(hal.makeVoid);
+    }
+
+    public canDeleteFile(): boolean {
+        return this.client.HasLink("DeleteFile");
+    }
+
+    public linkForDeleteFile(): hal.HalLink {
+        return this.client.GetLink("DeleteFile");
+    }
+
+    public getDeleteFileDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("DeleteFile", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasDeleteFileDocs(): boolean {
+        return this.client.HasLinkDoc("DeleteFile");
+    }
+}
+
+export class PathInfoResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: PathInfo = undefined;
+    public get data(): PathInfo {
+        this.strongData = this.strongData || this.client.GetData<PathInfo>();
+        return this.strongData;
+    }
+
+    public refresh(): Promise<PathInfoResult> {
         return this.client.LoadLink("self")
                .then(r => {
-                    return new ValueResult(r);
+                    return new PathInfoResult(r);
                 });
 
     }
@@ -379,33 +539,6 @@ export class ValueResult {
         return this.client.HasLinkDoc("self");
     }
 
-    public update(data: ValueInput): Promise<ValueResult> {
-        return this.client.LoadLinkWithData("Update", data)
-               .then(r => {
-                    return new ValueResult(r);
-                });
-
-    }
-
-    public canUpdate(): boolean {
-        return this.client.HasLink("Update");
-    }
-
-    public linkForUpdate(): hal.HalLink {
-        return this.client.GetLink("Update");
-    }
-
-    public getUpdateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Update", query)
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasUpdateDocs(): boolean {
-        return this.client.HasLinkDoc("Update");
-    }
-
     public delete(): Promise<void> {
         return this.client.LoadLink("Delete").then(hal.makeVoid);
     }
@@ -419,36 +552,36 @@ export class ValueResult {
     }
 }
 
-export class ValueCollectionResult {
+export class PathInfoCollectionResult {
     private client: hal.HalEndpointClient;
 
     constructor(client: hal.HalEndpointClient) {
         this.client = client;
     }
 
-    private strongData: ValueCollection = undefined;
-    public get data(): ValueCollection {
-        this.strongData = this.strongData || this.client.GetData<ValueCollection>();
+    private strongData: PathInfoCollection = undefined;
+    public get data(): PathInfoCollection {
+        this.strongData = this.strongData || this.client.GetData<PathInfoCollection>();
         return this.strongData;
     }
 
-    private itemsStrong: ValueResult[];
-    public get items(): ValueResult[] {
+    private itemsStrong: PathInfoResult[];
+    public get items(): PathInfoResult[] {
         if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
             this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.itemsStrong.push(new ValueResult(clients[i]));
+                this.itemsStrong.push(new PathInfoResult(clients[i]));
             }
         }
         return this.itemsStrong;
     }
 
-    public refresh(): Promise<ValueCollectionResult> {
+    public refresh(): Promise<PathInfoCollectionResult> {
         return this.client.LoadLink("self")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new PathInfoCollectionResult(r);
                 });
 
     }
@@ -494,21 +627,10 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("List");
     }
 
-    public getUpdateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Update", query)
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasUpdateDocs(): boolean {
-        return this.client.HasLinkDoc("Update");
-    }
-
-    public add(data: ValueInput): Promise<ValueResult> {
+    public add(data: PathInfoInput): Promise<PathInfoResult> {
         return this.client.LoadLinkWithData("Add", data)
                .then(r => {
-                    return new ValueResult(r);
+                    return new PathInfoResult(r);
                 });
 
     }
@@ -532,10 +654,10 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("Add");
     }
 
-    public next(): Promise<ValueCollectionResult> {
+    public next(): Promise<PathInfoCollectionResult> {
         return this.client.LoadLink("next")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new PathInfoCollectionResult(r);
                 });
 
     }
@@ -559,10 +681,10 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("next");
     }
 
-    public previous(): Promise<ValueCollectionResult> {
+    public previous(): Promise<PathInfoCollectionResult> {
         return this.client.LoadLink("previous")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new PathInfoCollectionResult(r);
                 });
 
     }
@@ -586,10 +708,10 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("previous");
     }
 
-    public first(): Promise<ValueCollectionResult> {
+    public first(): Promise<PathInfoCollectionResult> {
         return this.client.LoadLink("first")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new PathInfoCollectionResult(r);
                 });
 
     }
@@ -613,10 +735,10 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("first");
     }
 
-    public last(): Promise<ValueCollectionResult> {
+    public last(): Promise<PathInfoCollectionResult> {
         return this.client.LoadLink("last")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new PathInfoCollectionResult(r);
                 });
 
     }
@@ -1112,7 +1234,7 @@ export interface EntryPoint {
 export interface RolesQuery {
     /** The guid for the user, this is used to look up the user. */
     userId?: string[];
-    /** A name for the user. Used only as a reference, will be added to the result if the user is not found. */
+    /** Search by user name. */
     name?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
@@ -1121,9 +1243,15 @@ export interface RolesQuery {
 }
 
 export interface UserCollection {
-    offset?: number;
-    limit?: number;
+    /** Search by user name. */
+    name?: string;
+    /** The guid for the user, this is used to look up the user. */
+    userId?: string[];
     total?: number;
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
+    /** The limit of the number of items to return. */
+    limit?: number;
 }
 
 export interface UserSearchQuery {
@@ -1145,34 +1273,68 @@ export interface UserSearchCollection {
     limit?: number;
 }
 
-export interface ValueQuery {
-    /** Lookup a value by id. */
-    valueId?: string;
+export interface UploadInput {
+    file?: string;
+    content?: any;
+}
+
+export interface DeleteFileQuery {
+    file?: string;
+}
+
+export interface ListFileQuery {
+    dir?: string;
+}
+
+/** A list of files in a directory. */
+export interface FileList {
+    /** The directories inside this directory. */
+    directories?: string[];
+    /** The files inside this directory. */
+    files?: string[];
+    /** The path that this file list represents. */
+    path?: string;
+}
+
+export interface PathInfoQuery {
+    /** Get the PathInfo for a specific path. */
+    path?: string;
+    /** List the files in the given directory. */
+    directory?: string;
+    /** The search pattern to look for. */
+    pattern?: string;
+    /** List files and folders recursively. */
+    recursive?: boolean;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
     /** The limit of the number of items to return. */
     limit?: number;
 }
 
-export interface ValueCollection {
-    /** The number of pages (item number = Offset * Limit) into the collection to query. */
-    offset?: number;
-    /** Lookup a value by id. */
-    valueId?: string;
+export interface PathInfoCollection {
+    /** List the files in the given directory. */
+    directory?: string;
+    /** Get the PathInfo for a specific path. */
+    path?: string;
     total?: number;
+    /** The search pattern to look for. */
+    pattern?: string;
+    /** List files and folders recursively. */
+    recursive?: boolean;
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
     /** The limit of the number of items to return. */
     limit?: number;
 }
 
-export interface ValueInput {
-    name: string;
+export interface PathInfoInput {
+    nothing?: number;
+    file?: any;
 }
 
-export interface Value {
-    valueId?: string;
-    name?: string;
-    created?: string;
-    modified?: string;
+export interface PathInfo {
+    isDirectory?: boolean;
+    path?: string;
 }
 
 export interface UserSearch {

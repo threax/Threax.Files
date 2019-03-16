@@ -50,7 +50,7 @@ namespace Files.Repository
                                  .Select(i => new PathInfo()
                                  {
                                      Path = i,
-                                     IsDirectory = true
+                                     IsDirectory = false
                                  });
 
             var total = repoDirs.Concat(repoFiles).Count();
