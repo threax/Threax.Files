@@ -47,10 +47,5 @@ namespace Files
         /// doing stuff like regenerating clients. The default is true.
         /// </summary>
         public bool EnableValueProviders { get; set; } = true;
-
-        /// <summary>
-        /// The path on the file system that contains the files for this app.
-        /// </summary>
-        public string FileSystemPath { get; set; } = "./files";
     }
 }

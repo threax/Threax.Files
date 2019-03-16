@@ -4,19 +4,12 @@
 
 <div class="row">
     <div data-hr-controller="mainTable" class="col-md-8">
-        <h1>Files</h1>
         <load visible="true">
             <p>Working...</p>
         </load>
         <main>
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Path</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
                     <tbody data-hr-view="listing" data-hr-view-component="mainTableBody"></tbody>
                 </table>
                 <template data-hr-component="mainTableBody">
@@ -33,7 +26,7 @@
             </div>
             <button data-hr-on-click="add" class="btn btn-default" data-hr-toggle="add" data-hr-style-off="display:none;">Add</button>
 
-            <page-numbers></page-numbers>
+            <page-numbers start-items-per-page="50"></page-numbers>
         </main>
 
         <error>
@@ -42,7 +35,6 @@
     </div>
 
     <div class="col-md-4">
-        <h3>Search</h3>
         <div data-hr-controller="search">
             <load visible="true">
                 <p>Loading Search...</p>

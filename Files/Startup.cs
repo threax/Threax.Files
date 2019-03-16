@@ -98,27 +98,26 @@ namespace Files
             services.AddAppDatabase(appConfig.ConnectionString);
             services.AddAppMapper();
             services.AddAppRepositories();
-            services.AddFileRepository(new FileRepositoryOptions()
+            services.AddFileRepository(opt =>
             {
-                OutputDir = appConfig.FileSystemPath,
-                ConfigureVerifier = o =>
+                opt.UseLocalFiles(lfo => Configuration.Bind("FileRepository", lfo));
+                opt.ConfigureVerifier = fileVerifier =>
                 {
-                    o.AllowUnknownFiles = true;
-                    o
-                    .AddBitmap()
-                    .AddJpeg()
-                    .AddPng()
-                    .AddSvgXml()
-                    .AddGif()
-                    .AddPdf()
-                    .AddDocx()
-                    .AddDoc()
-                    .AddPptx()
-                    .AddPpt()
-                    .AddXlsx()
-                    .AddXls()
-                    .AddJson();
-                }
+                    fileVerifier.AllowUnknownFiles = true;
+                    fileVerifier.AddBitmap()
+                                .AddJpeg()
+                                .AddPng()
+                                .AddSvgXml()
+                                .AddGif()
+                                .AddPdf()
+                                .AddDocx()
+                                .AddDoc()
+                                .AddPptx()
+                                .AddPpt()
+                                .AddXlsx()
+                                .AddXls()
+                                .AddJson();
+                };
             });
 
             var halOptions = new HalcyonConventionOptions()
