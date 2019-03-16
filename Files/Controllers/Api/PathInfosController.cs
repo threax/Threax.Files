@@ -46,7 +46,7 @@ namespace Files.Controllers.Api
         {
             using (var read = pathInfo.File.OpenReadStream())
             {
-                return await repo.Upload("", Path.GetFileName(pathInfo.File.FileName), read, pathInfo.File.ContentType);
+                return await repo.Upload(pathInfo.Path, Path.GetFileName(pathInfo.File.FileName), read, pathInfo.File.ContentType);
             }
         }
 

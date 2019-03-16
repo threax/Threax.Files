@@ -1168,7 +1168,7 @@ export interface PathInfoCollection {
 }
 
 export interface PathInfoInput {
-    nothing?: number;
+    path?: string;
     file?: any;
 }
 

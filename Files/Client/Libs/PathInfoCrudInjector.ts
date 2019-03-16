@@ -1,13 +1,14 @@
 import * as client from 'clientlibs.ServiceClient';
 import * as hyperCrud from 'hr.widgets.HypermediaCrudService';
 import * as di from 'hr.di';
+import { CrudQueryManager } from 'hr.widgets.CrudQuery';
 
 export class PathInfoCrudInjector extends hyperCrud.AbstractHypermediaPageInjector {
     public static get InjectorArgs(): di.DiFunction<any>[] {
-        return [client.EntryPointInjector];
+        return [client.EntryPointInjector, CrudQueryManager];
     }
 
-    constructor(private injector: client.EntryPointInjector) {
+    constructor(private injector: client.EntryPointInjector, private queryManager: CrudQueryManager) {
         super();
     }
 
@@ -33,5 +34,11 @@ export class PathInfoCrudInjector extends hyperCrud.AbstractHypermediaPageInject
         return {
             path: id
         };
+    }
+
+    public async getDefaultAddObject(): Promise<client.PathInfoInput> {
+        return Promise.resolve<client.PathInfoInput>({
+            path: (<client.PathInfoQuery>this.queryManager.setupQuery()).directory
+        });
     }
 }

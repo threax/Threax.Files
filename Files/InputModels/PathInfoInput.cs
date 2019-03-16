@@ -14,8 +14,7 @@ namespace Files.InputModels
     [HalModel]
     public partial class PathInfoInput
     {
-        [HiddenUiType]
-        public int Nothing { get; set; } //This has to be here or this class won't be detected
+        public String Path { get; set; }
 
         public IFormFile File { get; set; }
     }
