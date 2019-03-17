@@ -45,7 +45,10 @@ namespace Files.Controllers
                 Response.Headers["Content-Disposition"] = "attachment";
             }
 
-            return new FileStreamResult(await repo.OpenRead(path), contentType);
+            return new FileStreamResult(await repo.OpenRead(path), contentType)
+            {
+                EnableRangeProcessing = true
+            };
         }
     }
 }
