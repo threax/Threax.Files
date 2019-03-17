@@ -39,6 +39,10 @@ namespace Files
         public static IWebHost BuildWebHostWithConfig(string[] args, String toolsConfigName = null)
         {
             var webHostBuilder = WebHost.CreateDefaultBuilder(args)
+                 .UseKestrel(o =>
+                 {
+                     o.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(30);
+                 })
                 .UseStartup<Startup>()
                 .ConfigureAppConfiguration((hostContext, config) =>
                 {
