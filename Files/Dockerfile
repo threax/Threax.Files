@@ -5,11 +5,11 @@ FROM threax/build AS build
 WORKDIR /src
 COPY . .
 WORKDIR /src/Files
-RUN yarn run yarn-install
+RUN npm install
 RUN dotnet restore Files.csproj
 RUN dotnet build Files.csproj -c Release -o /app
-RUN yarn run clean
-RUN yarn run build
+RUN npm run clean
+RUN npm run build
 
 FROM build AS publish
 RUN dotnet publish Files.csproj -c Release -o /app
