@@ -2,9 +2,6 @@
   "name": "asp.net",
   "version": "0.0.0",
   "private": true,
-  "devDependencies": {
-    "@types/node": "^6.0.69"
-  },
   "dependencies": {
     "bootstrap": "^4.2.1",
     "htmlrapier": "^19.0.0",
