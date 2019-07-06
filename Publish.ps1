@@ -1,3 +1,8 @@
+# This script will publish the project. 
+# You can optionally supply an artifactName to zip the project to a different final location.
+# The output file will be overwritten.
+# Usage: Publish.ps1 -artifactName artifactOutputFile.zip
+
 param (
     [string]$artifactName = "Publish.zip"
 )
