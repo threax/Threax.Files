@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Files.ViewModels;
 
 namespace Files.Controllers
 {
@@ -14,6 +15,27 @@ namespace Files.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Route("webmanifest.json")]
+        [AllowAnonymous]
+        public IActionResult Manifest([FromServices] DisplayConfig appConfig)
+        {
+            return Json(new WebManifest()
+            {
+                name = appConfig.SiteName,
+                short_name = appConfig.SiteName,
+                description = $"Files for {appConfig.SiteName}",
+                icons = new Icon[]
+                {
+                    new Icon()
+                    {
+                        src = Url.Content(appConfig.Icon.src),
+                        sizes = appConfig.Icon.sizes,
+                        type = appConfig.Icon.type
+                    }
+                }
+            });
         }
 
         //The other view action methods are in the additional partial classes for HomeController, expand the node for

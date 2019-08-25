@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Files.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Files
 {
