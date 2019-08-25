@@ -17,6 +17,12 @@ namespace Files.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public IActionResult AppStart()
+        {
+            return View();
+        }
+
         [Route("webmanifest.json")]
         [AllowAnonymous]
         public IActionResult Manifest([FromServices] DisplayConfig appConfig)
