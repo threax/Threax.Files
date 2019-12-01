@@ -39,7 +39,7 @@
     <PackageReference Include="Threax.AspNetCore.JwtCookieAuth" Version="2.1.0" />
     <PackageReference Include="Threax.AspNetCore.Docker.Certs" Version="2.0.0" />
     <PackageReference Include="HtmlRapier.TagHelpers" Version="8.0.0" />
-    <PackageReference Include="Threax.ProgressiveWebApp" Version="1.0.0-pre02" />
+    <PackageReference Include="Threax.ProgressiveWebApp" Version="1.0.0" />
     <PackageReference Include="Threax.ReflectedServices" Version="1.0.0" />
     <PackageReference Include="Threax.Sqlite.Ext" Version="2.0.0" />
     <PackageReference Include="Threax.AspNetCore.UserLookup" Version="1.0.0" />
