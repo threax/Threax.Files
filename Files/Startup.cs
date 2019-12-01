@@ -43,7 +43,6 @@ namespace Files
         //End user replace
 
         private AppConfig appConfig = new AppConfig();
-        private DisplayConfig displayConfig = new DisplayConfig();
         private ClientConfig clientConfig = new ClientConfig();
         private CorsManagerOptions corsOptions = new CorsManagerOptions();
 
@@ -53,7 +52,6 @@ namespace Files
             Configuration.Bind("JwtAuth", authConfig);
             Configuration.Bind("AppConfig", appConfig);
             Configuration.Bind("ClientConfig", clientConfig);
-            Configuration.Bind("DisplayConfig", displayConfig);
             Configuration.Bind("Cors", corsOptions);
         }
 
@@ -63,8 +61,7 @@ namespace Files
         public void ConfigureServices(IServiceCollection services)
         {
             Threax.AspNetCore.Docker.Certs.CertManager.LoadTrustedRoots(o => Configuration.Bind("CertManager", o));
-
-            services.AddSingleton<DisplayConfig>(displayConfig);
+            services.AddThreaxProgressiveWebApp(o => Configuration.Bind("DisplayConfig", o));
 
             //Add the client side configuration object
             services.AddClientConfig(clientConfig, o =>

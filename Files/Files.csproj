@@ -48,6 +48,7 @@
     <PackageReference Include="Threax.AspNetCore.UserLookup" Version="1.0.0" />
     <PackageReference Include="Threax.AspNetCore.UserLookup.Mvc" Version="2.1.0" />
     <PackageReference Include="Threax.AspNetCore.UserLookup.IdServer" Version="1.0.0" />
+    <PackageReference Include="Threax.ProgressiveWebApp" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Threax.ModelGen" Version="10.0.3" />
