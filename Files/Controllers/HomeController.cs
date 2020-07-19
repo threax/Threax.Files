@@ -6,16 +6,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Files.ViewModels;
 using Threax.ProgressiveWebApp;
+using Threax.AspNetCore.Mvc.CacheUi;
 
 namespace Files.Controllers
 {
     [Authorize(AuthenticationSchemes = AuthCoreSchemes.Cookies)]
-    public partial class HomeController : Controller
+    public partial class HomeController : CacheUiController
     {
-        //You can get rid of this AllowAnonymous to secure the welcome page
-        public IActionResult Index()
+        public HomeController(ICacheUiBuilder builder)
+          : base(builder)
         {
-            return View();
+
+        }
+
+        //You can get rid of this AllowAnonymous to secure the welcome page
+        public Task<IActionResult> Index()
+        {
+            return CacheUiView();
+        }
+
+        public Task<IActionResult> Header()
+        {
+            return CacheUiView();
+        }
+
+        public Task<IActionResult> Footer()
+        {
+            return CacheUiView();
         }
 
         [AllowAnonymous]
