@@ -16,5 +16,13 @@ namespace Files
         /// </summary>
         [ExpandHostPath]
         public string ServiceUrl { get; set; } = "~/api";
+
+        [ExpandHostPath]
+        public string AccessTokenPath { get; set; } = "~/Account/AccessToken";
+
+        /// <summary>
+        /// The path to the bearer cookie. Move this somewhere else
+        /// </summary>
+        public String BearerCookieName { get; set; }
     }
 }

@@ -41,4 +41,14 @@ export class PathInfoCrudInjector extends hyperCrud.AbstractHypermediaPageInject
             path: (<client.PathInfoQuery>this.queryManager.setupQuery()).directory
         });
     }
+
+    public async getSearchSchema() {
+        const entry = await this.injector.load();
+        const docs = await entry.getListPathInfosDocs({
+            includeRequest: true,
+            includeResponse: false
+        });
+
+        return docs.requestSchema;
+    }
 }
