@@ -13,6 +13,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Files.InputModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     public partial class PathInfoQuery : PagedCollectionQuery
     {
         /// <summary>

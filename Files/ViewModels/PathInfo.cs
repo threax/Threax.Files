@@ -14,6 +14,7 @@ using Files.Controllers;
 namespace Files.ViewModels 
 {
     [HalModel]
+    [CacheEndpointDoc]
     [HalSelfActionLink(typeof(PathInfosController), nameof(PathInfosController.Get))]
     [HalActionLink(typeof(PathInfosController), nameof(PathInfosController.Delete))]
     [DeclareHalLink(typeof(DownloadController), nameof(DownloadController.Download))]

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 namespace Files.InputModels 
 {
     [HalModel]
+    [CacheEndpointDoc]
     public partial class PathInfoInput
     {
         public String Path { get; set; }

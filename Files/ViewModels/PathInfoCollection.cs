@@ -10,6 +10,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace Files.ViewModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     [HalSelfActionLink(typeof(PathInfosController), nameof(PathInfosController.List))]
     [HalActionLink(typeof(PathInfosController), nameof(PathInfosController.Get), DocsOnly = true)] //This provides access to docs for showing items
     [HalActionLink(typeof(PathInfosController), nameof(PathInfosController.List), DocsOnly = true)] //This provides docs for searching the list

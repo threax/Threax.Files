@@ -7,6 +7,7 @@ using Threax.AspNetCore.UserLookup.Mvc.Controllers;
 namespace Files.ViewModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     [HalEntryPoint]
     [HalSelfActionLink(typeof(EntryPointController), nameof(EntryPointController.Get))]
     //This first set of links is for role editing, you can erase them if you don't have users or roles.
