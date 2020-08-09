@@ -57,12 +57,16 @@ namespace Files
                         config.AddJsonFileWithInclude($"appsettings.{toolsConfigName}.json", optional: true);
                     }
 
-                    //Secrets
-                    if (File.Exists("appsettings.secrets.json"))
+                    //Build the config so far and load the KeyPerFilePath.
+                    var built = config.Build();
+                    var keyPerFilePath = built.GetSection("AppConfig")?.GetValue<String>("KeyPerFilePath");
+                    if (!String.IsNullOrEmpty(keyPerFilePath))
                     {
-                        config.AddJsonFileWithInclude(Path.GetFullPath("appsettings.secrets.json"), optional: false);
+                        keyPerFilePath = Path.GetFullPath(keyPerFilePath);
+                        config.AddKeyPerFile(keyPerFilePath, false);
                     }
-                    else
+
+                    if (built.GetSection("AppConfig")?.GetValue<bool>("AddUserSecrets") == true)
                     {
                         config.AddUserSecrets<Program>();
                     }
