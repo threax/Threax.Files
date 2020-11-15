@@ -66,6 +66,12 @@ namespace Files
                         config.AddKeyPerFile(keyPerFilePath, false);
                     }
 
+                    //Secrets
+                    if (File.Exists("appsettings.secrets.json"))
+                    {
+                        config.AddJsonFileWithInclude(Path.GetFullPath("appsettings.secrets.json"), optional: false);
+                    }
+
                     if (built.GetSection("AppConfig")?.GetValue<bool>("AddUserSecrets") == true)
                     {
                         config.AddUserSecrets<Program>();
