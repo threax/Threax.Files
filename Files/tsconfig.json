@@ -17,11 +17,7 @@
       "DOM",
       "ES2015"
     ],
-    "paths": {
-      "clientlibs.*": [
-        "Client\\Libs\\*"
-      ]
-    }
+    "paths": {}
   },
   "compileOnSave": true,
   "include": [

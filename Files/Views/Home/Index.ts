@@ -1,12 +1,12 @@
 import * as standardCrudPage from 'htmlrapier.widgets/src/StandardCrudPage';
-import * as startup from 'clientlibs.startup';
+import * as startup from 'Client/Libs/startup';
 import * as deepLink from 'htmlrapier/src/deeplink';
-import { PathInfoCrudInjector } from 'clientlibs.PathInfoCrudInjector';
+import { PathInfoCrudInjector } from 'Client/Libs/PathInfoCrudInjector';
 
 import { CrudQueryManager, ICrudQueryComponent, QueryEventArgs } from 'htmlrapier.widgets/src/CrudQuery';
 import * as controller from 'htmlrapier/src/controller';
 import { CrudTableRowControllerExtensions, ICrudService, CrudTableRowController } from 'htmlrapier.widgets/src/CrudPage';
-import * as client from 'clientlibs.ServiceClient';
+import * as client from 'Client/Libs/ServiceClient';
 
 var injector = PathInfoCrudInjector;
 

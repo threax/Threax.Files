@@ -1,6 +1,6 @@
-import * as client from 'clientlibs.ServiceClient';
+import * as client from 'Client/Libs/ServiceClient';
 import * as controller from 'htmlrapier/src/controller';
-import * as startup from 'clientlibs.startup';
+import * as startup from 'Client/Libs/startup';
 import { Uri } from 'htmlrapier/src/uri';
 import * as loginPopup from 'htmlrapier.relogin/src/LoginPopup';
 

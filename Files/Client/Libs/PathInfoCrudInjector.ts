@@ -1,4 +1,4 @@
-import * as client from 'clientlibs.ServiceClient';
+import * as client from 'Client/Libs/ServiceClient';
 import * as hyperCrud from 'htmlrapier.widgets/src/HypermediaCrudService';
 import * as di from 'htmlrapier/src/di';
 import { CrudQueryManager } from 'htmlrapier.widgets/src/CrudQuery';

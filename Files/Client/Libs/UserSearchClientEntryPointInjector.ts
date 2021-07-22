@@ -1,5 +1,5 @@
 ﻿import * as controller from 'htmlrapier/src/controller';
-import * as client from 'clientlibs.ServiceClient';
+import * as client from 'Client/Libs/ServiceClient';
 import * as userDirectoryClient from 'htmlrapier.roleclient/src/UserDirectoryClient';
 import * as roleClient from 'htmlrapier.roleclient/src/RoleClient';
 

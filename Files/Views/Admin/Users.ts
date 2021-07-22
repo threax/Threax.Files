@@ -1,4 +1,4 @@
-﻿import * as startup from 'clientlibs.startup';
+﻿import * as startup from 'Client/Libs/startup';
 import * as crudService from 'htmlrapier.roleclient/src/UserCrudService';
 import * as deepLink from 'htmlrapier/src/deeplink';
 

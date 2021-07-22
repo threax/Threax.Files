@@ -1,6 +1,6 @@
 ﻿import * as explorer from 'htmlrapier.halcyon-explorer/src/HalcyonBrowserController';
 import * as controller from 'htmlrapier/src/controller';
-import * as startup from 'clientlibs.startup';
+import * as startup from 'Client/Libs/startup';
 import * as deepLink from 'htmlrapier/src/deeplink';
 
 var builder = startup.createBuilder();

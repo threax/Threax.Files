@@ -1,4 +1,4 @@
-﻿import * as startup from 'clientlibs.startup';
+﻿import * as startup from 'Client/Libs/startup';
 import * as loggedInPage from 'htmlrapier.relogin/src/LoggedInPage';
 
 const builder = startup.createBuilder();
