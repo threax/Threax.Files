@@ -1,7 +1,7 @@
 import * as client from 'clientlibs.ServiceClient';
-import * as hyperCrud from 'hr.widgets.HypermediaCrudService';
-import * as di from 'hr.di';
-import { CrudQueryManager } from 'hr.widgets.CrudQuery';
+import * as hyperCrud from 'htmlrapier.widgets/src/HypermediaCrudService';
+import * as di from 'htmlrapier/src/di';
+import { CrudQueryManager } from 'htmlrapier.widgets/src/CrudQuery';
 
 export class PathInfoCrudInjector extends hyperCrud.AbstractHypermediaPageInjector {
     public static get InjectorArgs(): di.DiFunction<any>[] {
