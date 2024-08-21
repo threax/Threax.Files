@@ -176,7 +176,7 @@ namespace Files
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
-                o.FrontEndLibrary = HtmlRapier.TagHelpers.FrontEndLibrary.Bootstrap4;
+                o.FrontEndLibrary = HtmlRapier.TagHelpers.FrontEndLibrary.Bootstrap5;
             });
 
             services.AddScoped<IToolRunner>(s =>
