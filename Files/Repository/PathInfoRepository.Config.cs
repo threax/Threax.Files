@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
-using Threax.ReflectedServices;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Files.Repository;
+using Threax.ReflectedServices;
 
 namespace Files.Repository.Config
 {

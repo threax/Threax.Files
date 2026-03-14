@@ -1,10 +1,4 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Files.Mappers
+﻿namespace Files.Mappers
 {
     /// <summary>
     /// The app mapper defines all the object mappings that this application can perform.
@@ -13,11 +7,9 @@ namespace Files.Mappers
     /// </summary>
     public partial class AppMapper
     {
-        private IMapper mapper;
-
-        public AppMapper(IMapper mapper)
+        public AppMapper()
         {
-            this.mapper = mapper;
+
         }
     }
 }
